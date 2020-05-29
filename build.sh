@@ -1,5 +1,4 @@
 #/bin/bash
-
 if [[ $# -eq 0 ]] ; then
     echo 'No parameters found - build, unittest, integrationtest, run'
     exit 1
@@ -11,22 +10,22 @@ do
   case $var in
 	build)
 		echo "Building jar!"
-		gradlew clean build
+		./gradlew clean build
 		break
 		;;
 	unittest)
 		echo "Running unit tests!"
-		gradlew test
+		./gradlew test
 		break
 		;;
   integrationtest)
 		echo "Running integration tests!"
-		gradlew integrationTest
+		./gradlew integrationTest
 		break
 		;;
   run)
 		echo "Running application!"
-		gradlew bootRun
+		./gradlew bootRun
 		break
 		;;
 	*)
