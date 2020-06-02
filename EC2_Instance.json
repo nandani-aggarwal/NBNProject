@@ -174,7 +174,7 @@
       "ap-northeast-2"   : {"HVM64" : "ami-00dc207f8ba6dc919", "HVMG2" : "NOT_SUPPORTED"},
       "ap-northeast-3"   : {"HVM64" : "ami-0b65f69a5c11f3522", "HVMG2" : "NOT_SUPPORTED"},
       "ap-southeast-1"   : {"HVM64" : "ami-05b3bcf7f311194b3", "HVMG2" : "ami-0e46ce0d6a87dc979"},
-      "ap-southeast-2"   : {"HVM64" : "ami-02fd0b06f06d93dfc", "HVMG2" : "ami-0c0ab057a101d8ff2"},
+      "ap-southeast-2"   : {"HVM64" : "ami-03686c686b463366b", "HVMG2" : "ami-0c0ab057a101d8ff2"},
       "ap-south-1"       : {"HVM64" : "ami-0ad42f4f66f6c1cc9", "HVMG2" : "ami-0244c1d42815af84a"},
       "us-east-2"        : {"HVM64" : "ami-0cd3dfa4e37921605", "HVMG2" : "NOT_SUPPORTED"},
       "ca-central-1"     : {"HVM64" : "ami-07423fb63ea0a0930", "HVMG2" : "NOT_SUPPORTED"},
