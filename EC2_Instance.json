@@ -188,45 +188,16 @@
   "Resources" : {
     "EC2Instance" : {
       "Type" : "AWS::EC2::Instance",
-      "Metadata" : {
-        "Comment1": "Configure the bootstrap helpers to install docker",
-        "AWS::CloudFormation::Init": {
-          "configSets": {
-            "Install": [
-              "Install"
-            ]
-          },
-          "Install": {
-            "packages": {
-              "yum": {
-                "dcoker": []
-              }
-            },
-            "services": {
-              "sysvinit": {
-                "dcoker": {
-                  "enabled": "true",
-                  "ensureRunning": "true"
-                }
-              }
-            }
-          }
-        }
-      },
       "Properties" : {
         "InstanceType" : { "Ref" : "InstanceType" },
         "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
         "KeyName" : { "Ref" : "KeyName" },
         "UserData"       : { "Fn::Base64" : { "Fn::Join" : ["", [
           "#!/bin/bash -xe\n",
-          "yum install -y aws-cfn-bootstrap\n",
-
-          "# Install the packages from the metadata\n",
-          "/opt/aws/bin/cfn-init -v ",
-          "         --stack ", { "Ref" : "AWS::StackName" },
-          "         --resource EC2Instance ",
-          "         --configsets Install ",
-          "         --region ", { "Ref" : "AWS::Region" }, "\n"
+          "sudo yum update -y\n",
+          "sudo yum install docker -y\n",
+          "sudo service docker start\n",
+          "sudo usermod -a -G docker ec2-user\n"
         ]]}},
         "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
           { "Fn::FindInMap" : [ "AWSInstanceType2Arch", { "Ref" : "InstanceType" }, "Arch" ] } ] }
