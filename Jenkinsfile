@@ -9,11 +9,6 @@ pipeline {
             jdk 'jdk8'
         }
     stages {
-      stage('Cloning Git') {
-            steps {
-              git 'https://github.com/nandani-aggarwal/NBNProject.git'
-          }
-       }
       stage('build') {
         steps {
           echo "Building jar!"
