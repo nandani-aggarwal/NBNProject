@@ -189,26 +189,30 @@
     "EC2Instance" : {
       "Type" : "AWS::EC2::Instance",
       "Metadata" : {
-        "Comment1" : "Configure the bootstrap helpers to install docker",
-
-        "AWS::CloudFormation::Init" : {
-          "configSets" : {
-            "Install" : [ "Install" ]
+        "Comment1": "Configure the bootstrap helpers to install docker",
+        "AWS::CloudFormation::Init": {
+          "configSets": {
+            "Install": [
+              "Install"
+            ]
           },
-
-          "Install" : {
-            "packages" : {
-              "yum" : {
-                "dcoker"        : []
+          "Install": {
+            "packages": {
+              "yum": {
+                "dcoker": []
               }
             },
-            "services" : {
-              "sysvinit" : {
-                "dcoker"   : { "enabled" : "true", "ensureRunning" : "true" }
+            "services": {
+              "sysvinit": {
+                "dcoker": {
+                  "enabled": "true",
+                  "ensureRunning": "true"
+                }
               }
             }
           }
-        },
+        }
+      },
       "Properties" : {
         "InstanceType" : { "Ref" : "InstanceType" },
         "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
