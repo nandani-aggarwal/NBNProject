@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    stages {
+      stage("run cloudFormation") {
+                  steps {
+                      script {
+                          withAWS(credentials: 'aws-key',region : 'ap-southeast-2') {
+                              cfnUpdate(
+                                  stack: "nbn-ec2-jenkins-stack",
+                                  file: "EC2_Instance.json",
+                                  params: [
+                                      InstanceType: "t2.micro",
+                                      SSHLocation: "0.0.0.0/0"
+                                      HTTPLocation: "0.0.0.0/0"
+                                      ICMPLocation: "0.0.0.0/0"
+                                      KeyName: "Nandani_infosys"
+                                  ],
+                                  timeoutInMinutes: 10,
+                                  pollInterval: 600
+                              )
+                          }
+                      }
+                  }
+              }
+    }
+}

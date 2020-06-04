@@ -39,7 +39,7 @@ pipeline {
               }
             }
           }
-      stage('Deploy Image') {
+      stage('Pushing Image') {
             steps{
               script {
                 docker.withRegistry( '', registryCredential ) {
@@ -48,5 +48,17 @@ pipeline {
               }
             }
            }
+       stage('Image') {
+           steps{
+             script {
+               dockerImage = docker.build registry + ":$BUILD_NUMBER"
+             }
+           }
+         }
+    }
+    post {
+        failure {
+            git checkout ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}
+        }
     }
 }
