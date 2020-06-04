@@ -52,11 +52,9 @@ pipeline {
          }
        stage('Deploy on EC2') {
           steps{
-            script {
-              sh "ssh ssh ec2-user@${INSTANCE_IDENTITY}"
+              sh "ssh ec2-user@${INSTANCE_IDENTITY}"
               sh "sudo docker pull ${dockerImage}"
               sh "docker run --name nbncontainer ${dockerImage}"
-            }
           }
        }
     }
