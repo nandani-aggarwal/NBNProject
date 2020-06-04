@@ -224,7 +224,7 @@
           "# Install the packages from the metadata\n",
           "/opt/aws/bin/cfn-init -v ",
           "         --stack ", { "Ref" : "AWS::StackName" },
-          "         --resource WebServerInstance ",
+          "         --resource EC2Instance ",
           "         --configsets Install ",
           "         --region ", { "Ref" : "AWS::Region" }, "\n"
         ]]}},
