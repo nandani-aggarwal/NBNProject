@@ -6,7 +6,7 @@ pipeline {
                       script {
                           withAWS(credentials: 'aws-key',region : 'ap-southeast-2') {
                               cfnUpdate(
-                                  stack: "nbn-ec2-jenkins-stack",
+                                  stack: "nbn-ec2-docker-jenkins-stack",
                                   file: "EC2_Instance.json",
                                   params: [
                                       InstanceType: "t2.micro",
