@@ -48,17 +48,26 @@ pipeline {
               }
             }
            }
-       stage('Image') {
+       stage('Image to DockerHub') {
            steps{
              script {
                dockerImage = docker.build registry + ":$BUILD_NUMBER"
              }
            }
          }
+       stage('Deploy on EC2') {
+          steps{
+            script {
+              sh "ssh ssh ec2-user@${INSTANCE_IDENTITY}"
+              sh "sudo docker pull ${dockerImage}"
+              sh "docker run --name nbncontainer ${dockerImage}"
+            }
+          }
+       }
     }
     post {
         failure {
-            git checkout ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}
+            echo "pipeline failed"
         }
     }
 }
