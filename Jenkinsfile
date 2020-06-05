@@ -55,7 +55,8 @@ pipeline {
            script {
               sh "ssh -i /root/Nandani_infosys.pem ec2-user@${INSTANCE_IDENTITY}"
               docker.withRegistry('', registryCredential) {
-                  sh "sudo docker pull ${dockerImage}"
+                  dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                  sh "docker pull ${dockerImage}"
                   sh "docker run --name nbncontainer ${dockerImage}"
               }
              }
