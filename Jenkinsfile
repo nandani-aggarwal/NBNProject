@@ -52,9 +52,11 @@ pipeline {
          }
        stage('Deploy on EC2') {
           steps{
-              sh "ssh ec2-user@${INSTANCE_IDENTITY}"
-              sh "sudo docker pull ${dockerImage}"
-              sh "docker run --name nbncontainer ${dockerImage}"
+              sh "ssh ~/Desktop/NBN\ Challenge/Nandani_infosys.pem ec2-user@${INSTANCE_IDENTITY}"
+              docker.withRegistry('', registryCredential) {
+                  sh "sudo docker pull ${dockerImage}"
+                  sh "docker run --name nbncontainer ${dockerImage}"
+              }
           }
        }
     }
