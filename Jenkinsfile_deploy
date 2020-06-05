@@ -50,6 +50,17 @@ pipeline {
              }
            }
          }
+       stage('Deploy on EC2') {
+          steps{
+           script {
+              sh "ssh -t -i /root/Nandani_infosys.pem ec2-user@${INSTANCE_IDENTITY}"
+              docker.withRegistry('', registryCredential) {
+                  sh "docker pull $registry:$BUILD_NUMBER"
+                  sh "docker run --publish 8080:8081 --detach --name nbnjenkinsec2container-$BUILD_NUMBER $registry:$BUILD_NUMBER"
+              }
+             }
+          }
+       }
     }
     post {
         failure {
