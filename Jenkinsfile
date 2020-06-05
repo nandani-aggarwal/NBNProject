@@ -54,7 +54,7 @@ pipeline {
           steps{
            script {
               sh "ssh -t -i /root/Nandani_infosys.pem ec2-user@${INSTANCE_IDENTITY}"
-              docker.withRegistry('', registryCredential) {nandani/nbn-docker-registery:21
+              docker.withRegistry('', registryCredential) {
                   sh "docker pull $registry:$BUILD_NUMBER"
                   sh "docker run --name nbncontainer $registry:$BUILD_NUMBER"
               }
