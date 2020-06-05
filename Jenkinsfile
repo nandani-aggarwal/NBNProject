@@ -56,7 +56,7 @@ pipeline {
               sh "ssh -t -i /root/Nandani_infosys.pem ec2-user@${INSTANCE_IDENTITY}"
               docker.withRegistry('', registryCredential) {
                   sh "docker pull $registry:$BUILD_NUMBER"
-                  sh "docker run --publish 8080:8081 --detach --name nbncontainer $registry:$BUILD_NUMBER"
+                  sh "docker run --publish 8080:8081 --detach --name nbnjenkinsec2container $registry:$BUILD_NUMBER"
               }
              }
           }
